@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from airflow import DAG
-from airflow.operators.docker_operator import DockerOperator
+from airflow.providers.docker.operators.docker import DockerOperator
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
@@ -24,6 +24,6 @@ with DAG(
 ) as dag:
     t1 = BashOperator(task_id="task1", bash_command="echo 'Hello World?'")
     t2 = BashOperator(task_id="task2", bash_command="echo 'Hello World!'")
-
+    t3 = DockerOperator(task_id="task3", image="ubuntu:20.04", command="echo 'Hi from Docker!'")
     # sets downstream for t1
-    t1 >> t2
+    t1 >> [t2, t3]
