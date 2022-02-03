@@ -1,10 +1,8 @@
 from datetime import datetime, timedelta
 from airflow import DAG
+from airflow.operators.docker_operator import DockerOperator
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-
-from first import task_1
-from second import task_2
 
 default_args = {
     "owner": "airflow",
@@ -24,8 +22,8 @@ with DAG(
     default_args=default_args,
     catchup=False,
 ) as dag:
-    t1 = task_1(dag)
-    t2 = task_2(dag)
+    t1 = BashOperator(bash_command="echo 'Hello World?'")
+    t2 = BashOperator(bash_command="echo 'Hello World!'")
 
     # sets downstream for t1
     t1 >> t2
