@@ -22,8 +22,8 @@ with DAG(
     default_args=default_args,
     catchup=False,
 ) as dag:
-    t1 = BashOperator(bash_command="echo 'Hello World?'")
-    t2 = BashOperator(bash_command="echo 'Hello World!'")
+    t1 = BashOperator(task_id="task1", bash_command="echo 'Hello World?'")
+    t2 = BashOperator(task_id="task2", bash_command="echo 'Hello World!'")
 
     # sets downstream for t1
     t1 >> t2
