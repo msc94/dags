@@ -33,7 +33,7 @@ with DAG(
         task_id="task3",
         image="ubuntu:20.04",
         cmds=["echo"],
-        arguments=["Hi from Docker!"],
+        arguments=["Hi from Kubernetes!"],
     )
 
     # sets downstream for t1
