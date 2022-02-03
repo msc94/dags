@@ -28,7 +28,8 @@ with DAG(
     t1 = BashOperator(task_id="task1", bash_command="echo 'Hello World?'")
     t2 = BashOperator(task_id="task2", bash_command="echo 'Hello World!'")
     t3 = KubernetesPodOperator(
-        name="Kubernetes Pod",
+        namespace="default",
+        name="my-kubernetes-pod",
         task_id="task3",
         image="ubuntu:20.04",
         cmds=["echo"],
